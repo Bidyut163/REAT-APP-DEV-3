@@ -19,6 +19,13 @@ module.exports = async function (req, res, next) {
                 .json({ msg: 'Not a RECEPTIONIST, authorization denied' });
         }
 
+        // verify active user
+        if (!user.active) {
+            return res
+                .status(401)
+                .json({ msg: 'Not a active user, authorization denied' });
+        }
+
         next();
     } catch (err) {
         console.log(err);

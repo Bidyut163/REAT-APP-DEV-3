@@ -36,6 +36,8 @@ const Users = ({ getUsers, user: { users, loading } }) => {
                                     <th>Name</th>
                                     <th>Position</th>
                                     <th>Email</th>
+                                    <th>Active</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
 

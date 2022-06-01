@@ -1,4 +1,10 @@
-import { GET_USERS, USER_ERROR, ADD_USER, GET_USER } from '../actions/types';
+import {
+    GET_USERS,
+    USER_ERROR,
+    ADD_USER,
+    GET_USER,
+    ACTIVATE_USER,
+} from '../actions/types';
 
 const initialState = {
     users: [],
@@ -28,6 +34,17 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 users: [...state.users, payload],
+                loading: false,
+            };
+        case ACTIVATE_USER:
+            return {
+                ...state,
+                users: state.users.map((user) => {
+                    const active = user.active;
+                    return user.id === payload
+                        ? { ...user, active: !active }
+                        : user;
+                }),
                 loading: false,
             };
         case USER_ERROR:

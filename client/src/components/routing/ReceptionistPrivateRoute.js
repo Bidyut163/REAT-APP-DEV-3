@@ -18,7 +18,10 @@ const ReceptionistPrivateRoute = ({
         return <h1>Loaing...</h1>;
     }
 
-    return isAuthenticated && user && user.role === 'RECEPTIONIST' ? (
+    return isAuthenticated &&
+        user &&
+        user.role === 'RECEPTIONIST' &&
+        user.active ? (
         <Route {...rest} render={(props) => <MasterLayout {...props} />} />
     ) : (
         <Redirect to="/official/login" />

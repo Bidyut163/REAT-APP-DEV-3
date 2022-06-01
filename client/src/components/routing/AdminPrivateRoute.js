@@ -18,7 +18,7 @@ const AdminPrivateRoute = ({
         return <h1>Loading...</h1>;
     }
 
-    return isAuthenticated && user && user.role === 'ADMIN' ? (
+    return isAuthenticated && user && user.role === 'ADMIN' && user.active ? (
         <Route {...rest} render={(props) => <MasterLayout {...props} />} />
     ) : (
         <Redirect to="/official/login" />

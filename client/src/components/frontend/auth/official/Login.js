@@ -20,17 +20,22 @@ const Login = ({ login, auth: { isAuthenticated, user } }) => {
     };
 
     // Redirect if Logged in and Admin
-    if (isAuthenticated && user && user.role === 'ADMIN') {
+    if (isAuthenticated && user && user.role === 'ADMIN' && user.active) {
         return <Redirect to="/official/admin/dashboard" />;
     }
 
     // Redirect if Logged in and Receptionist
-    if (isAuthenticated && user && user.role === 'RECEPTIONIST') {
+    if (
+        isAuthenticated &&
+        user &&
+        user.role === 'RECEPTIONIST' &&
+        user.active
+    ) {
         return <Redirect to="/official/receptionist/panel" />;
     }
 
     // Redirect if Logged in and Registrar
-    if (isAuthenticated && user && user.role === 'REGISTRAR') {
+    if (isAuthenticated && user && user.role === 'REGISTRAR' && user.active) {
         return <Redirect to="/official/registrar/panel" />;
     }
 

@@ -37,6 +37,10 @@ const User = sequelize.define(
             type: Sequelize.STRING,
             allowNull: false,
         },
+        active: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+        },
     },
     { timestamps: false }
 );

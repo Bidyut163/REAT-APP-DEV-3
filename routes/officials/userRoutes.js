@@ -63,6 +63,7 @@ router.post(
                 email: email,
                 password: password,
                 role: role,
+                active: 1,
             });
 
             // generate the salt
@@ -152,6 +153,7 @@ router.post(
                 email: email,
                 password: password,
                 role: role,
+                active: 1,
             });
 
             // generate the salt
@@ -206,6 +208,49 @@ router.get('/:id', auth, isAdmin, async (req, res) => {
         res.json(user);
     } catch (err) {
         console.log(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route PATCH api/users/:id/active
+// @desc  Active/Deactivate a user
+// @access Private
+
+router.patch('/:id/active', auth, isAdmin, async (req, res) => {
+    try {
+        const active = await User.findOne({
+            attributes: ['active'],
+            where: {
+                id: req.params.id,
+            },
+        });
+
+        // check if the user is active or not
+        if (active.get({ plain: true }).active) {
+            await User.update(
+                {
+                    active: 0,
+                },
+                {
+                    where: { id: req.params.id },
+                }
+            );
+
+            res.json({ msg: 'User Deactivated' });
+        } else {
+            await User.update(
+                {
+                    active: 1,
+                },
+                {
+                    where: { id: req.params.id },
+                }
+            );
+
+            res.json({ msg: 'User Activated' });
+        }
+    } catch (err) {
+        console.log(err.message);
         res.status(500).send('Server Error');
     }
 });
