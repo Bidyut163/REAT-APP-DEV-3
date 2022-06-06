@@ -5,6 +5,7 @@ import {
     USER_ERROR,
     ADD_USER,
     ACTIVATE_USER,
+    DELETE_USER,
     GET_ERRORS,
 } from './types';
 
@@ -85,6 +86,31 @@ export const activateUser = (id) => async (dispatch) => {
 
         dispatch({
             type: ACTIVATE_USER,
+            payload: id,
+        });
+    } catch (err) {
+        const errors = err.response.data;
+
+        if (errors) {
+            dispatch({ type: GET_ERRORS, payload: errors });
+        }
+
+        dispatch({
+            type: USER_ERROR,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status,
+            },
+        });
+    }
+};
+
+export const deleteUser = (id) => async (dispatch) => {
+    try {
+        await axios.delete(`/api/users/${id}`);
+
+        dispatch({
+            type: DELETE_USER,
             payload: id,
         });
     } catch (err) {

@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { activateUser } from '../../../../actions/user';
+import { activateUser, deleteUser } from '../../../../actions/user';
 
 const UserItem = ({
     user: { firstName, lastName, id, email, role, active },
     activateUser,
+    deleteUser,
 }) => {
     const handleOnChange = () => {
         activateUser(id);
+    };
+
+    const onDelete = () => {
+        deleteUser(id);
     };
 
     return (
@@ -45,16 +50,16 @@ const UserItem = ({
                 >
                     Edit
                 </Link>
-                <Link
-                    to={`/official/registrar/appeals/${id}`}
+                <button
+                    onClick={onDelete}
                     className="btn btn-sm btn-danger"
                     style={{ fontSize: '.7rem', padding: '0 .2rem' }}
                 >
                     Delete
-                </Link>
+                </button>
             </td>
         </tr>
     );
 };
 
-export default connect(null, { activateUser })(UserItem);
+export default connect(null, { activateUser, deleteUser })(UserItem);

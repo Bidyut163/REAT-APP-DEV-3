@@ -4,6 +4,7 @@ import {
     ADD_USER,
     GET_USER,
     ACTIVATE_USER,
+    DELETE_USER,
 } from '../actions/types';
 
 const initialState = {
@@ -34,6 +35,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 users: [...state.users, payload],
+                loading: false,
+            };
+        case DELETE_USER:
+            return {
+                ...state,
+                users: state.users.filter((user) => user.id !== payload),
                 loading: false,
             };
         case ACTIVATE_USER:

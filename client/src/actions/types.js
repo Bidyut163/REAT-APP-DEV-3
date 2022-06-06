@@ -8,6 +8,7 @@ export const GET_USER = 'GET_USER';
 export const USER_ERROR = 'USER_ERROR';
 export const ADD_USER = 'ADD_USER';
 export const ACTIVATE_USER = 'ACTIVATE_USER';
+export const DELETE_USER = 'DELETE_USER';
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

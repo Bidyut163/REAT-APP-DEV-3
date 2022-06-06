@@ -37,7 +37,7 @@ const Users = ({ getUsers, user: { users, loading } }) => {
                                     <th>Position</th>
                                     <th>Email</th>
                                     <th>Active</th>
-                                    <th>Action</th>
+                                    <th>Edit/Delete</th>
                                 </tr>
                             </thead>
 
